@@ -1,0 +1,42 @@
+PARTNER POULTRY & ANIMAL FEEDS — INTERNET CONNECTED ADMIN + STAFF SYSTEM
+
+IMPORTANT: This version is designed for different Wi-Fi networks. The Node.js server is the central online system. Admin and staff phones do NOT need to be on the same Wi-Fi.
+
+HOW IT WORKS
+Admin browser  <---- Internet ---->  PPAF central server  <---- Internet ---->  Staff phones
+                                      |
+                                      +-- shared stock, staff accounts, sales, expenses
+
+DEPLOYMENT
+1. Put this whole folder on a computer/cloud server that has a public HTTPS address.
+2. Install Node.js 18+ if your hosting provider does not provide it.
+3. Run: node server.js
+4. The server listens on PORT (default 8099) and on 0.0.0.0 so it can accept internet traffic.
+5. Open the public HTTPS address in the Admin browser.
+6. Staff open the same address followed by /staff.html.
+
+EXAMPLE
+Admin: https://YOUR-DOMAIN.example/
+Staff: https://YOUR-DOMAIN.example/staff.html
+
+NETWORKS
+Admin may use Wi-Fi A, staff may use Wi-Fi B, mobile data, or another ISP. They all connect to the same public server over the internet.
+
+OFFLINE STAFF SALES
+Staff can continue creating sales without internet. Sales stay in the phone's offline queue. When internet returns, the Staff app syncs queued sales to the central server and stock is reduced there.
+
+CENTRAL DATA
+The server stores the shared database in ppaf-data.json. Admin is the source of truth for staff accounts and stock.
+
+ENVIRONMENT VARIABLES
+PORT=8099
+PPAF_API_KEY=change-this-to-a-long-random-secret
+HOST=0.0.0.0
+
+SECURITY
+Do not use the sample API key for a real public deployment. Set PPAF_API_KEY to a long random secret. Use HTTPS. The current app is suitable for a controlled small-business deployment/testing; stronger production authentication and encrypted password storage can be added as a later security upgrade.
+
+LOCAL TEST
+Windows PowerShell: $env:PORT=8099; node server.js
+Linux/macOS: PORT=8099 node server.js
+Then open http://localhost:8099/

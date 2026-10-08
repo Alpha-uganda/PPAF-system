@@ -1,0 +1,8 @@
+{
+  "name": "ppaf-connected-system",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Partner Poultry and Animal Feeds internet-connected admin and staff system",
+  "scripts": {"start": "node server.js"},
+  "engines": {"node": ">=18"}
+}
